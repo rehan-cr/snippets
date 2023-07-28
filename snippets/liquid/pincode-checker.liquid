@@ -1,0 +1,99 @@
+{% assign pc_label = pc_label %}
+{% assign zip_list = zip_list %}
+{% assign pc_success = pc_success %}
+{% assign pc_error = pc_error %}
+{% assign color_error = '#f05d5d' %}
+{% assign color_success = '#51a551' %}
+
+{% comment %} 
+  # pc_label is a label for pincode checker's input of fronend
+  # zip_list is a comma separated list of Zip. 
+  # pc_success is success message that you are going to show after success.
+  # pc_error is a error message
+  # color_success is color of success message
+  # color_error is color of error message
+{% endcomment %}
+
+{% style %}
+.pincode-checker__wrapper {
+  padding: 1rem 0 1rem 0;
+}
+.pincode-checker {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.pc-input__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 0.5rem));
+  grid-column-gap: 1rem;
+}
+.pos-relative {
+  position: relative;
+}
+.pc-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+}
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.pc-message__wrapper {
+  position: absolute;
+}
+.pc-message {
+  font-weight: bold;
+  font-family: inherit;
+}
+.pc-success {
+  color: {{color_success}};
+}
+.pc-error {
+  color: {{color_error}}
+}
+{% endstyle %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const zipList = [{{zip_list}}]
+    const checkBtn = document.querySelector('#pc_btn');
+    const message = document.querySelector('#pc_message')
+    const input = document.querySelector('#pc_input')
+    input.addEventListener('blur', () => {
+      if(input.value.length > 0) {
+        input.classList.add('form-field-filled')
+      }
+      else {
+        input.classList.remove('form-field-filled')
+      }
+    })
+    checkBtn.addEventListener('click', () => {
+        const zip = parseInt(input.value)
+      if(zipList.includes(zip)) {
+          message.innerHTML = '<p class="pc-success">{{ pc_success }}<p>'
+      } 
+        else{
+          message.innerHTML = '<p class="pc-error">{{ pc_error }}</p>'
+        }
+    })
+  });
+</script>
+
+<div class="pincode-checker__wrapper">
+  <div class="pincode-checker">
+    <summary class="product-request-form__heading">
+      <span>{{ pc_label }}</span>
+    </summary>
+    <div class="pc-input__wrapper">
+      <div class="pos-relative pc-input__group">
+        <input type="number" id="pc_input" class="form-field-input pc-input" min="0">
+        <label class="form-field-title" for="product-request-form__name">Enter pincode</label>
+      </div>
+      <div class="pc-input__group">
+        <button class="button-primary mdc-ripple-surface mdc-ripple-upgraded pc-btn" id="pc_btn">Check</button>
+      </div>
+    </div>
+    <div class="pc-message__wrapper pc-message" id="pc_message"></div>
+  </div>
+</div>
