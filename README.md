@@ -9,3 +9,7 @@
 ## Liquid Code Snippets
 1. [Pincode Checker](liquid/pincode-checker.liquid)
 1. [Section Dynamic Padding](liquid/section-dynamic-padding.liquid)
+
+
+## React Code Snippets
+1. [Class Componet with Example](react/class-component-with-example.jsx)
