@@ -8,3 +8,4 @@
 
 ## Liquid Code Snippets
 1. [Pincode Checker](snippets/liquid/pincode-checker.liquid)
+1. [Section Dynamic Padding](snippets/liquid/section-dynamic-padding.liquid)
